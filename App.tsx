@@ -6,21 +6,33 @@
  */
 
 import { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
+import Colors from './constants/colors';
 
 export default function App() {
   const [ userNumber, setuserNumber ] = useState();
+  const [ gameIsOver, setGameIsOver ] = useState(true);
 
   const pickedNumberHandler = (pickedNumber: number) => {
     setuserNumber(pickedNumber);
-  }
+    setGameIsOver(false);
+  };
+
+  const gameOverhandler = () => {
+    setGameIsOver(true);
+  };
 
   let screen = <StartGameScreen onPickNumber={ pickedNumberHandler }/>;
 
   if (userNumber) {
-    screen = <GameScreen />
+    screen = <GameScreen userNumber={ userNumber } onGameOver={ gameOverhandler} />
+  };
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />
   };
 
   return (
@@ -32,7 +44,9 @@ export default function App() {
         imageStyle={ styles.backgroundImage }
       >
         {/* <StartGameScreen /> */}
-        { screen }
+        <SafeAreaView style={ styles.rootScreen }>
+          { screen }
+        </SafeAreaView>
       </ImageBackground>
     </View>
   );
@@ -41,7 +55,7 @@ export default function App() {
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    backgroundColor: '#ddb52f',
+    backgroundColor: Colors.accent500,
   },
   backgroundImage: {
     opacity: 0.15,
