@@ -13,16 +13,23 @@ import GameOverScreen from './screens/GameOverScreen';
 import Colors from './constants/colors';
 
 export default function App() {
-  const [ userNumber, setuserNumber ] = useState();
+  const [ userNumber, setUserNumber ] = useState();
   const [ gameIsOver, setGameIsOver ] = useState(true);
+  const [ guessRounds, setGuessRounds ] = useState(0);
 
   const pickedNumberHandler = (pickedNumber: number) => {
-    setuserNumber(pickedNumber);
+    setUserNumber(pickedNumber);
     setGameIsOver(false);
   };
 
   const gameOverhandler = () => {
     setGameIsOver(true);
+  };
+
+  const startNewGameHandler = () => {
+    setUserNumber(null);
+    // setGameIsOver(true);
+    setGuessRounds(0);
   };
 
   let screen = <StartGameScreen onPickNumber={ pickedNumberHandler }/>;
@@ -32,7 +39,13 @@ export default function App() {
   };
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />
+    screen = (
+      <GameOverScreen 
+        roundsNumber={ guessRounds } 
+        userNumber={ userNumber } 
+        onStartNewGame={ startNewGameHandler } 
+      />
+    );
   };
 
   return (
