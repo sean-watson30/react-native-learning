@@ -1,7 +1,12 @@
 import { StyleSheet, Text } from "react-native";
 import Colors from "../../constants/colors";
 
-const InstructionText = ({ children, style }) => {
+interface InstructionTextProps {
+  children: string,
+  style?: {}, // the ? makes this an optional field for the interface
+}
+
+const InstructionText = ({ children, style }: InstructionTextProps) => {
   return (
     <Text style={ [styles.instructionText, style ] }>{ children }</Text>
   )

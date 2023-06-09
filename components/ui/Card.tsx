@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import Colors from "../../constants/colors";
 
-const Card = ({ children }) => {
+const Card = (props: { children: any }) => {
   return (
     <View style={ styles.card }>
-      { children }
+      { props.children }
     </View>
   )
 };

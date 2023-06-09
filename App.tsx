@@ -13,7 +13,7 @@ import GameOverScreen from './screens/GameOverScreen';
 import Colors from './constants/colors';
 
 export default function App() {
-  const [ userNumber, setUserNumber ] = useState();
+  const [ userNumber, setUserNumber ] = useState<number | null>();
   const [ gameIsOver, setGameIsOver ] = useState(true);
   const [ guessRounds, setGuessRounds ] = useState(0);
 
@@ -22,8 +22,9 @@ export default function App() {
     setGameIsOver(false);
   };
 
-  const gameOverhandler = () => {
+  const gameOverhandler = (numberOfRounds: number) => {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds)
   };
 
   const startNewGameHandler = () => {
