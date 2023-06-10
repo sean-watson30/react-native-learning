@@ -14,8 +14,8 @@ import Colors from './constants/colors';
 
 export default function App() {
   const [ userNumber, setUserNumber ] = useState<number | null>();
-  const [ gameIsOver, setGameIsOver ] = useState(true);
-  const [ guessRounds, setGuessRounds ] = useState(0);
+  const [ gameIsOver, setGameIsOver ] = useState<boolean>(true);
+  const [ guessRounds, setGuessRounds ] = useState<number>(0);
 
   const pickedNumberHandler = (pickedNumber: number) => {
     setUserNumber(pickedNumber);

@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 // import Colors from "../constants/colors";
 
 interface TitleProps {
@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     // borderColor: Colors.accent500,
     borderColor: 'black',
-    borderWidth: 2,
+    // borderWidth: Platform.OS === 'android' ? 2 : 0,
+    borderWidth: Platform.select({ ios: 1, android: 2 }),
     padding: 12,
+    maxWidth: '80%',
+    width: 300,
   },
 });
